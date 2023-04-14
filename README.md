@@ -1,6 +1,11 @@
 # naver-sens
 Naver Cloud Platform SENS(Simple &amp; Easy Notification Service) python wrapper
 
+Install : 
+```
+pip install naver-sens
+```
+
 Usage Guide : https://codedbyjst.tistory.com/10
 
 send message ex.
