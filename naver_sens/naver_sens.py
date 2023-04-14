@@ -13,9 +13,9 @@ import datetime
 
 class SensClient:
   """
-  Reference : https://api.ncloud-docs.com/docs/ai-application-service-sens-smsv2\n
-  Guide : https://codedbyjst.tistory.com/\n
   Naver Cloud Platform SENS(Simple & Easy Notification Service) python wrapper\n
+  Reference : https://api.ncloud-docs.com/docs/ai-application-service-sens-smsv2\n
+  Guide : https://codedbyjst.tistory.com/10\n
   To use this class, 3 parameters must be provided.\n
   [service_id] : service id of project. Can be found in https://console.ncloud.com/sens/project\n
   [access_key] : access key for Naver Cloud Platform. Can be found in https://www.ncloud.com/mypage/manage/authkey\n
@@ -38,7 +38,7 @@ class SensClient:
     """
     timestamp = int(time.time() * 1000)
     timestamp = str(timestamp)
-    
+
     return timestamp
     
   def genereate_signature(self, method: str, timestamp: str, uri: str):
