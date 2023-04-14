@@ -30,8 +30,18 @@ class SensClient:
     self.access_key = access_key
     self.secret_key = secret_key
     self.from_num = None
-  
-  def make_signature(self, method: str, timestamp: str, uri: str):
+
+  def generate_timestamp(self):
+    """
+    According to NCloud API V2, x-ncp-apigw-timestamp header must be set to use API.
+    This function generates the timestamp(type string) for that.
+    """
+    timestamp = int(time.time() * 1000)
+    timestamp = str(timestamp)
+    
+    return timestamp
+    
+  def genereate_signature(self, method: str, timestamp: str, uri: str):
     """
     Reference : https://api.ncloud-docs.com/docs/common-ncpapi\n
     According to NCloud API V2, x-ncp-apigw-signature-v2 header must be set to use API.
@@ -102,8 +112,7 @@ class SensClient:
       if seconds < 600:
         raise Exception("Reservation cannot be requested within 10 minutes.")
 
-    timestamp = int(time.time() * 1000)
-    timestamp = str(timestamp)
+    timestamp = self.generate_timestamp()
 
     access_key = self.access_key
     service_id = self.service_id
@@ -112,7 +121,7 @@ class SensClient:
     uri_2 = "/messages"
     uri = uri_1 + service_id + uri_2
     req_url = base_url + uri
-    sign_key = self.make_signature(method="POST", timestamp=timestamp, uri=uri)
+    sign_key = self.genereate_signature(method="POST", timestamp=timestamp, uri=uri)
 
     headers = {
     'Content-Type' : "application/json; charset=utf-8",
